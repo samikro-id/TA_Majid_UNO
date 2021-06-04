@@ -5,6 +5,7 @@ Servo servo;
 #define SERVO_PIN       6
 #define SERVO_OPEN      180
 #define SERVO_CLOSE     0
+bool servo_open         = false;
 
 #define LIMIT_C_PIN     8
 #define LIMIT_O_PIN     9
@@ -104,7 +105,9 @@ void bacaSensor(){
         pinvolt += (float) (5.0 * voltRaw) / 1024.0;  
 
         uint16_t arusRaw = analogRead(CURRENT_PIN);
-        pinArus += (float) (5.0 * arusRaw) / 1024.0;  
+        pinArus += (float) (5.0 * arusRaw) / 1024.0;
+
+        delay(10);  
     }
     /* BACA TEGANGAN */   
     volt = (float) (pinvolt / SENSOR_LOOP) * 5;
@@ -134,10 +137,12 @@ void bacaSensor(){
 
     if(distance >= WATER_LIMIT){
         servo.write(SERVO_OPEN);
+        servo_open = true;
     }
 
     if(distance <= WATER_RELEASE){
         servo.write(SERVO_CLOSE);
+        servo_open = false;
     }
 }
 
@@ -165,6 +170,16 @@ void prosessData(){
                     default :   serial_buff += "\"relay\":\"OFF\"";
                         break;
                 }
+
+                switch(servo_open){
+                    case true       :   serial_buff += "\"servo\":\"OPEN\"" 
+                        break;
+                    case false      :   serial_buff += "\"servo\":\"CLOSE\""
+                        break;
+                    default         :   serial_buff += "\"servo\":\"CLOSE\""
+                        break;
+                }
+                
                 serial_buff += "}";
 
                 Serial.print(serial_buff);
@@ -193,6 +208,16 @@ void prosessData(){
                     default :   serial_buff += "\"relay\":\"OFF\"";
                         break;
                 }
+
+                switch(servo_open){
+                    case true       :   serial_buff += "\"servo\":\"OPEN\"" 
+                        break;
+                    case false      :   serial_buff += "\"servo\":\"CLOSE\""
+                        break;
+                    default         :   serial_buff += "\"servo\":\"CLOSE\""
+                        break;
+                }
+
                 serial_buff += "}";
 
                 Serial.print(serial_buff);
@@ -289,4 +314,8 @@ void ioInit(){
  *  {"op":"control","cmd":"set","relay":"OFF"}
  *  {"op":"control","cmd":"set","relay":"OPEN"}
  *  {"op":"control","cmd":"set","relay":"CLOSE"}
+ *  
+ *  https://api.thingspeak.com/channels/1370408/charts/1?yaxismin=-2&yaxismax=2&days=1&height=0&width=0
+ *  https://api.thingspeak.com/channels/1370408/charts/2?yaxismin=0&days=1&height=0&width=0
+ *  https://api.thingspeak.com/channels/1370408/charts/3?yaxismin=0&days=1&height=0&width=0
  */
