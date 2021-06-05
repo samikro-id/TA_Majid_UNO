@@ -169,14 +169,14 @@ void prosessData(){
                         break;
                     default :   serial_buff += "\"relay\":\"OFF\"";
                         break;
-                }
+                };
 
                 switch(servo_open){
-                    case true       :   serial_buff += "\"servo\":\"OPEN\"" 
+                    case true       :   serial_buff += "\"servo\":\"OPEN\""; 
                         break;
-                    case false      :   serial_buff += "\"servo\":\"CLOSE\""
+                    case false      :   serial_buff += "\"servo\":\"CLOSE\"";
                         break;
-                    default         :   serial_buff += "\"servo\":\"CLOSE\""
+                    default         :   serial_buff += "\"servo\":\"CLOSE\"";
                         break;
                 }
                 
@@ -210,11 +210,11 @@ void prosessData(){
                 }
 
                 switch(servo_open){
-                    case true       :   serial_buff += "\"servo\":\"OPEN\"" 
+                    case true       :   serial_buff += "\"servo\":\"OPEN\""; 
                         break;
-                    case false      :   serial_buff += "\"servo\":\"CLOSE\""
+                    case false      :   serial_buff += "\"servo\":\"CLOSE\"";
                         break;
-                    default         :   serial_buff += "\"servo\":\"CLOSE\""
+                    default         :   serial_buff += "\"servo\":\"CLOSE\"";
                         break;
                 }
 
