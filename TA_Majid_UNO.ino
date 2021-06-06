@@ -51,7 +51,7 @@ uint32_t sensor_time;
 String serial_buff;
 bool serial_complete    = false;
 
-#define SENSOR_HEIGH    20      // cm
+#define SENSOR_HEIGHT   20      // cm
 #define WATER_LIMIT     15      // cm
 #define WATER_RELEASE   10      // cm
 int distance;
@@ -135,14 +135,14 @@ void bacaSensor(){
     long duration = pulseIn(ECHO_PIN, HIGH, 1000000);
     // Calculating the distance
     distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-    int water_heigh = SENSOR_HEIGH - distance;
+    int water_height = SENSOR_HEIGHT - distance;
 
-    if(water_heigh >= WATER_LIMIT){
+    if(water_height >= WATER_LIMIT){
         servo.write(SERVO_OPEN);
         servo_open = true;
     }
 
-    if(water_heigh <= WATER_RELEASE){
+    if(water_height <= WATER_RELEASE){
         servo.write(SERVO_CLOSE);
         servo_open = false;
     }
