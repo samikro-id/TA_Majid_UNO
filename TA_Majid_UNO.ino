@@ -161,22 +161,22 @@ void prosessData(){
                 serial_buff = "{\"op\":\"data\",\"tegangan\":" + String(volt, 1) +",\"arus\":"+ String(current, 3) + ",\"energy\":" + String(energy, 2) + ",\"distance\":"+ String(distance) + ",";
                 
                 switch(relay_state){
-                    case RELAY_OFF      :   serial_buff += "\"relay\":\"OFF\"";
+                    case RELAY_OFF      :   serial_buff += "\"rl\":\"OFF\"";
                         break;
-                    case RELAY_RIGHT    :   serial_buff += "\"relay\":\"OPEN\"";
+                    case RELAY_RIGHT    :   serial_buff += "\"rl\":\"OPEN\"";
                         break;
-                    case RELAY_LEFT     :   serial_buff += "\"relay\":\"CLOSE\"";
+                    case RELAY_LEFT     :   serial_buff += "\"rl\":\"CLOSE\"";
                         break;
-                    default :   serial_buff += "\"relay\":\"OFF\"";
+                    default :   serial_buff += "\"rl\":\"OFF\"";
                         break;
-                };
+                }
 
                 switch(servo_open){
-                    case true       :   serial_buff += ",\"servo\":\"OPEN\""; 
+                    case true       :   serial_buff += ",\"sv\":\"OPEN\""; 
                         break;
-                    case false      :   serial_buff += ",\"servo\":\"CLOSE\"";
+                    case false      :   serial_buff += ",\"sv\":\"CLOSE\"";
                         break;
-                    default         :   serial_buff += ",\"servo\":\"CLOSE\"";
+                    default         :   serial_buff += ",\"sv\":\"CLOSE\"";
                         break;
                 }
                 
@@ -189,7 +189,7 @@ void prosessData(){
             const char * cmd = root["cmd"];
 
             if(strcmp(cmd, "set") == 0){
-                const char* relay = root["relay"];
+                const char* relay = root["rl"];
 
                 if(strcmp(relay, "OFF") == 0){          relayState(RELAY_OFF);  }
                 else if(strcmp(relay, "OPEN") == 0){    relayState(RELAY_RIGHT);}
@@ -199,22 +199,22 @@ void prosessData(){
                 serial_buff = "{\"op\":\"data\",\"tegangan\":" + String(volt, 1) +",\"arus\":"+ String(current, 3) + ",\"energy\":" + String(energy, 2) + ",\"distance\":"+ String(distance) + ",";
                 
                 switch(relay_state){
-                    case RELAY_OFF      :   serial_buff += "\"relay\":\"OFF\"";
+                    case RELAY_OFF      :   serial_buff += "\"rl\":\"OFF\"";
                         break;
-                    case RELAY_RIGHT    :   serial_buff += "\"relay\":\"OPEN\"";
+                    case RELAY_RIGHT    :   serial_buff += "\"rl\":\"OPEN\"";
                         break;
-                    case RELAY_LEFT     :   serial_buff += "\"relay\":\"CLOSE\"";
+                    case RELAY_LEFT     :   serial_buff += "\"rl\":\"CLOSE\"";
                         break;
-                    default :   serial_buff += "\"relay\":\"OFF\"";
+                    default :   serial_buff += "\"rl\":\"OFF\"";
                         break;
                 }
 
                 switch(servo_open){
-                    case true       :   serial_buff += ",\"servo\":\"OPEN\""; 
+                    case true       :   serial_buff += ",\"sv\":\"OPEN\""; 
                         break;
-                    case false      :   serial_buff += ",\"servo\":\"CLOSE\"";
+                    case false      :   serial_buff += ",\"sv\":\"CLOSE\"";
                         break;
-                    default         :   serial_buff += ",\"servo\":\"CLOSE\"";
+                    default         :   serial_buff += ",\"sv\":\"CLOSE\"";
                         break;
                 }
 
