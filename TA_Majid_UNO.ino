@@ -134,15 +134,15 @@ void bacaSensor(){
     // Reads the ECHO_PIN, returns the sound wave travel time in microseconds
     long duration = pulseIn(ECHO_PIN, HIGH, 1000000);
     // Calculating the distance
-    distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
-    int water_height = SENSOR_HEIGHT - distance;
+    int dist = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+    distance = SENSOR_HEIGHT - dist; // distance is water height
 
-    if(water_height >= WATER_LIMIT){
+    if(distance >= WATER_LIMIT){
         servo.write(SERVO_OPEN);
         servo_open = true;
     }
 
-    if(water_height <= WATER_RELEASE){
+    if(distance <= WATER_RELEASE){
         servo.write(SERVO_CLOSE);
         servo_open = false;
     }
